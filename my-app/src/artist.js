@@ -18,7 +18,7 @@ const ArtistPage = () => {
         const response = await fetch('http://127.0.0.1:8000/api/images');
         const res = await response.json();
         setImages(res.images);
-        console.log("imgages")
+        console.log("imgagessss")
       } catch(error) {
         console.log(error)
       
