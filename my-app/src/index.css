@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.UserInputGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin: auto;
+  background-color: inherit;
+  max-width: 500px;
+  border-radius: 10px;
+  padding: 20px 20px 20px 20px;
+  margin-top: 4%;
+  margin-bottom: 30px;
+  min-height: 200px;
+}
+.UserInputGrid input{
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  margin-top: 25px;
+}
+.UserInputGrid label{
+  padding-top: 20px;
+}
+.card{
+  padding-left: 20px;
+  padding-top: 20px;
+  max-width: 170px;
+  min-height: 150px;
+  font-size: 40px;
+  padding-top: 50px;
+  background-color: white;
+  color: black;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 10px;
+  margin: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.cardsgrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: rgb(186, 234, 241);
+  margin: auto;
+  max-width: 500px;
+  border-radius: 10px;
+  margin-top: 4%;
+  min-height: 300px;
+}
+
+.winnerText{
+  font-family: 'Times New Roman', Times, serif;
+}
+.winnerText p {
+   width: 50%;
+   margin: auto;
+   border-radius: 4px;
+   margin-top: 10px;
+   background-color: rgb(237, 183, 162);
+   padding: 11px 11px 11px 11px
+}
+.button{
+  margin: auto;
+}
+.button button{
+  background-color: rgb(99, 98, 98);
+  border-radius: 6%;
+  margin-left: 45%;
+  font-size: 12px;
+  
+  max-width: 900px;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 15px;
+  color: whitesmoke
+}
+.button button:hover{
+  background-color: antiquewhite;
+  color: black;
+}
+
+.cardleft{
+  font-size: 11px;
+  font-weight: bolder;
+  font-family: 'Times New Roman', Times, serif;
+}
