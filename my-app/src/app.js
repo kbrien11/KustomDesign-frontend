@@ -1,4 +1,4 @@
-import './App.css';
+
 import CreateGame from './CreateGame';
 import Test from './kustomDesign';
 import Login from './login';
