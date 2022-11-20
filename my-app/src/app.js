@@ -2,7 +2,7 @@
 import CreateGame from './CreateGame';
 import Test from './kustomDesign';
 import Login from './login';
-
+import './App.css'
 import UserPage from './user';
 import ArtistPage from './artist';
 import Register from './register';
