@@ -1,31 +1,25 @@
 import React, { useState, useEffect }  from "react";
 import Images from "./Image";
 import { useNavigate } from "react-router-dom";
+import * as imageActions from './actions/imageActionTypes'
+
+import {connect} from 'react-redux'
+import { bindActionCreators } from "redux";
 
 
 
 
-const ArtistPage = () => {
-
-    const[image,setImages] = useState([])
+const ArtistPage = ({images,serviceActions}) => {
 
 
-    useEffect(() => {getImages()},([]))
+console.log(images)
+console.log(serviceActions)
 
-    const getImages = async () => {
-  
-        try{
-        const response = await fetch('http://127.0.0.1:8000/api/images');
-        const res = await response.json();
-        setImages(res.images);
-        console.log("imgagessss")
-      } catch(error) {
-        console.log(error)
-      
-      }
-      };
+    useEffect(() => {serviceActions.getImageData()},([]))
 
-      const imageMap = image.map((img) => {
+    
+
+      const imageMap =  images.map((img) => {
         return < Images data = {img} />
       } )
 
@@ -68,4 +62,15 @@ const ArtistPage = () => {
     )
 }
 
-export default ArtistPage
+
+const mapStateToProps = (state)=> ({
+
+  images:state.images
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  serviceActions: bindActionCreators({...imageActions.imageServices},dispatch)
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(ArtistPage)

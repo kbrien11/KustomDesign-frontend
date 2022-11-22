@@ -1,5 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import  imageReducer from './reducers/imageReducer'
 
-export default configureStore({
-  reducer: {},
-})
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
+const store = createStore(imageReducer, middleware);
+
+export default store;
