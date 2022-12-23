@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import Images from "./Image";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import * as imageActions from './actions/imageActionTypes'
 
-const ArtistProfilePage = () => {
-  const [image, setImages] = useState([]);
+import {connect} from 'react-redux'
+import { bindActionCreators } from "redux";
+
+const ArtistProfilePage = ({ images, serviceActions }) => {
   const [profileImage, setProfileImage] = useState("");
 
   const { name } = useParams();
   const artistid = sessionStorage.getItem("artistid");
 
   useEffect(() => {
-    getImages();
+    serviceActions.getImageDataForArtist(artistid,name);
   }, []);
   useEffect(() => {
     getProfilePicture();
@@ -31,21 +34,8 @@ const ArtistProfilePage = () => {
     }
   };
 
-  const getImages = async () => {
-    try {
-      const artistid = sessionStorage.getItem("artistid");
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/imagePerArtist/${artistid}/${name}`
-      );
-      const res = await response.json();
 
-      setImages(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const imageMap = image.map((img) => {
+  const imageMap = images.map((img) => {
     return <Images data={img} />;
   });
 
@@ -60,7 +50,7 @@ const ArtistProfilePage = () => {
       <div className="artistProfilePage">
         <img src={profileImage} width="100" height="190"></img>
         <p>{stars} <span> Matches: {imageMap.length}</span></p>
-        {image.length > 0 && artistid != null && (
+        {images.length > 0 && (
           <div>
             <h3>Matches</h3>
             <div class="grid-wrapper">
@@ -73,4 +63,16 @@ const ArtistProfilePage = () => {
   );
 };
 
-export default ArtistProfilePage;
+const mapStateToProps = (state) => ({
+  images: state.imageReducer.images,
+  showDetails:state.imageReducer.showDetails
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  serviceActions: bindActionCreators(
+    { ...imageActions.imageServices },
+    dispatch
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistProfilePage);
