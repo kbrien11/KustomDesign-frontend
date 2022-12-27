@@ -1,38 +1,48 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from './Typography';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "./Typography";
 
 function ProductSmokingHero() {
   return (
-    <Container
+    <Box
       component="section"
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', my: 9 }}
+      sx={{ display: "flex", bgcolor: "secondary.white", overflow: "hidden" }}
     >
-      <Button
+      <Container
+        component="section"
         sx={{
-          border: '4px solid currentColor',
-          borderRadius: 0,
-          height: 'auto',
-          py: 2,
-          px: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          my: 9,
         }}
       >
-        <Typography variant="h4" component="span">
-          Got any questions? Need help?
+        <Button
+          sx={{
+            border: "4px solid black",
+            borderRadius: 0,
+            height: "auto",
+            py: 2,
+            px: 5,
+          }}
+        >
+          <Typography variant="h4" component="span">
+            Got any questions? Need help?
+          </Typography>
+        </Button>
+        <Typography variant="subtitle1" sx={{ my: 3 }}>
+          We are here to help. Get in touch!
         </Typography>
-      </Button>
-      <Typography variant="subtitle1" sx={{ my: 3 }}>
-        We are here to help. Get in touch!
-      </Typography>
-      <Box
+        {/* <Box
         component="img"
         src="/static/themes/onepirate/producBuoy.svg"
         alt="buoy"
         sx={{ width: 60 }}
-      />
-    </Container>
+      /> */}
+      </Container>
+    </Box>
   );
 }
 
