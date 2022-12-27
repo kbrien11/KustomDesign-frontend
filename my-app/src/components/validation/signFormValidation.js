@@ -9,8 +9,31 @@ export const signInFormValidation = Yup.object().shape({
 
     password: Yup.string()
     .required('Please enter a valid password')
-    .min(3, 'Valid passwords must be atleast 6 characters')
-    .max(15, 'no more than 15 characters allowed')
+    .min(3, 'Valid passwords must be atleast 3 characters')
+    .max(15, 'no more than 15 characters allowed'),
+
+    firstname:Yup.string()
+    .required('Must enter a valid first name')
+    .matches(/^\s*[\w]+\s*$/,'Only alphanumeric characters are allowed'),
+
+    lastname: Yup.string()
+    .required('Must enter a valid last name')
+    .matches(/^\s*[\w]+\s*$/,'Only alphanumeric characters are allowed'),
+
+    username: Yup.string()
+    .required('Please enter a valid username')
+    .min(6, 'Valid usernames must be atleast 6 characters')
+    .max(15, 'no more than 15 characters allowed'),
+
+    user_type: Yup.string()
+    .required('User type is required'),
+
+    file: Yup.string()
+    .required("Profile picture is required")
+
+
+
+   
 })
 
 
