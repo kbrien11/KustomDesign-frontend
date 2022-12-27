@@ -130,12 +130,10 @@ function SignIn({ userType, id, serviceActions }) {
                       label="Email Address"
                       name={"email"}
                       onBlur={(e) => {
-                        console.log(e.target.value);
                         setFieldValue("email", e.target.value);
                         setFieldTouched("email");
                       }}
                       onChange={(e) => {
-                        console.log(e.target.value);
                         setFieldValue("email", e.target.value);
                         setFieldTouched("email");
                       }}
@@ -180,7 +178,15 @@ function SignIn({ userType, id, serviceActions }) {
                     <FormButton
                       onClick={(e) => handleSubmit(values)}
                       sx={{ mt: 3, mb: 2 }}
-                      disabled={errors.password || errors.email}
+                      // disabled={
+                      //   errors.password ||
+                      //   errors.email ||
+                      //   !touched.password ||
+                      //   !touched.email
+                      // }
+                      disabled={
+                        !formik.dirty || errors.email || errors.password
+                      }
                       size="large"
                       color="secondary"
                       fullWidth

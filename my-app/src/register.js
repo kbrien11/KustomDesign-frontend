@@ -147,10 +147,10 @@ const Register = ({ success, error, serviceActions }) => {
                     marked="center"
                     align="center"
                   >
-                    Sign in
+                    Register
                   </Typography>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link href="/login" variant="body2">
+                    {"Already an account? Sign In"}
                   </Link>
 
                   <Box
@@ -159,166 +159,207 @@ const Register = ({ success, error, serviceActions }) => {
                     }}
                   >
                     {/* <Form onSubmit={LoginButton}> */}
-                      <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                   <TextField
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                      value={values.firstname}
-                      name={"firstname"}
-                      label="firstname"
-                      type="text"
-                      id="firstname"
-                      autoComplete="current-password"
-                      onBlur={(e) => {
-                        setFieldValue("firstname", e.target.value);
-                        setFieldTouched("firstname");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("firstname", e.target.value);
-                        setFieldTouched("firstname");
-                      }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                   <TextField
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                      value={values.lastname}
-                      name={"lastname"}
-                      label="lastname"
-                      type="text"
-                      id="lastname"
-                      onBlur={(e) => {
-                        setFieldValue("lastname", e.target.value);
-                        setFieldTouched("lastname");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("lastname", e.target.value);
-                        setFieldTouched("lastname");
-                      }}
-                    />
-                </Grid>
-              </Grid>
-                  <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                          <TextField
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                      value={values.username}
-                      name={"username"}
-                      label="username"
-                      type="text"
-                      id="username"
-                      onBlur={(e) => {
-                        setFieldValue("username", e.target.value);
-                        setFieldTouched("username");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("username", e.target.value);
-                        setFieldTouched("username");
-                      }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                   
-                    <FormControl
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                    >
-                      {touched.user_type ? (
-                        ""
-                      ) : (
-                        <InputLabel className="Select-input-label">
-                          User Type
-                        </InputLabel>
-                      )}
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>First Name*</p>
+                        </label>
+                        <TextField
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                          value={values.firstname}
+                          name={"firstname"}
+                          type="text"
+                          id="firstname"
+                          autoComplete="current-password"
+                          onBlur={(e) => {
+                            setFieldValue("firstname", e.target.value);
+                            setFieldTouched("firstname");
+                          }}
+                          onChange={(e) => {
+                            setFieldValue("firstname", e.target.value);
+                            setFieldTouched("firstname");
+                          }}
+                        />
+                        {touched.firstname && errors.firstname ? (
+                          <div className="FormError">{errors.firstname} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>Last Name*</p>
+                        </label>
+                        <TextField
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                          value={values.lastname}
+                          name={"lastname"}
+                          type="text"
+                          id="lastname"
+                          onBlur={(e) => {
+                            setFieldValue("lastname", e.target.value);
+                            setFieldTouched("lastname");
+                          }}
+                          onChange={(e) => {
+                            setFieldValue("lastname", e.target.value);
+                            setFieldTouched("lastname");
+                          }}
+                        />
+                        {touched.lastname && errors.lastname ? (
+                          <div className="FormError">{errors.lastname} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>User Name*</p>
+                        </label>
+                        <TextField
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                          value={values.username}
+                          name={"username"}
+                          type="text"
+                          id="username"
+                          onBlur={(e) => {
+                            setFieldValue("username", e.target.value);
+                            setFieldTouched("username");
+                          }}
+                          onChange={(e) => {
+                            setFieldValue("username", e.target.value);
+                            setFieldTouched("username");
+                          }}
+                        />
+                        {touched.username && errors.username ? (
+                          <div className="FormError">{errors.username} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
 
-                      <Select
-                        margin="normal"
-                        required
-                        size="xlarge"
-                        fullWidth
-                        value={values.user_type}
-                        name={"user_type"}
-                        InputLabel="User_type"
-                        type="text"
-                        id="user_type"
-                        onBlur={(e) => {
-                          setFieldValue("user_type", e.target.value);
-                          setFieldTouched("user_type");
-                        }}
-                        onChange={(e) => {
-                          setFieldValue("user_type", e.target.value);
-                          setFieldTouched("user_type");
-                        }}
-                      >
-                        <MenuItem value={"User"}>User</MenuItem>
-                        <MenuItem value={"Artist"}>Artist</MenuItem>
-                      </Select>
-                    </FormControl>
-                </Grid>
-              </Grid>
-                    <TextField
-                      value={values.email}
-                      fullWidth
-                      id="email"
-                      label="Email Address"
-                      name={"email"}
-                      onBlur={(e) => {
-                        console.log(e.target.value);
-                        setFieldValue("email", e.target.value);
-                        setFieldTouched("email");
-                      }}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                        setFieldValue("email", e.target.value);
-                        setFieldTouched("email");
-                      }}
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>User type*</p>
+                        </label>
+                        <FormControl
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                        >
+                          <Select
+                            margin="normal"
+                            required
+                            size="xlarge"
+                            fullWidth
+                            value={values.user_type}
+                            name={"user_type"}
+                            type="text"
+                            id="user_type"
+                            onBlur={(e) => {
+                              setFieldValue("user_type", e.target.value);
+                              setFieldTouched("user_type");
+                            }}
+                            onChange={(e) => {
+                              setFieldValue("user_type", e.target.value);
+                              setFieldTouched("user_type");
+                            }}
+                          >
+                            <MenuItem value={"User"}>User</MenuItem>
+                            <MenuItem value={"Artist"}>Artist</MenuItem>
+                          </Select>
+                        </FormControl>
+                        {touched.user_type && errors.user_type ? (
+                          <div className="FormError">{errors.user_type} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>Email*</p>
+                        </label>
+                        <TextField
+                          value={values.email}
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                          id="email"
+                          name={"email"}
+                          onBlur={(e) => {
+                            console.log(e.target.value);
+                            setFieldValue("email", e.target.value);
+                            setFieldTouched("email");
+                          }}
+                          onChange={(e) => {
+                            console.log(e.target.value);
+                            setFieldValue("email", e.target.value);
+                            setFieldTouched("email");
+                          }}
 
-                      //   onChange={(e) => setInputEmail(e.target.value)}
-                    />
-                    {touched.email && errors.email ? (
-                      <div className="FormError">{errors.email} </div>
-                    ) : (
-                      ""
-                    )}
-                    <TextField
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                      value={values.password}
-                      name={"password"}
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      onBlur={(e) => {
-                        setFieldValue("password", e.target.value);
-                        setFieldTouched("password");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("password", e.target.value);
-                        setFieldTouched("password");
-                      }}
-                    />
-                    {touched.password && errors.password ? (
-                      <div className="FormError">{errors.password} </div>
-                    ) : (
-                      ""
-                    )}
-                
-             
+                          //   onChange={(e) => setInputEmail(e.target.value)}
+                        />
+                        {touched.email && errors.email ? (
+                          <div className="FormError">{errors.email} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <label className="input-label">
+                          {" "}
+                          <p>Password*</p>
+                        </label>
+                        <TextField
+                          margin="normal"
+                          required
+                          size="xlarge"
+                          fullWidth
+                          value={values.password}
+                          name={"password"}
+                          type="password"
+                          id="password"
+                          autoComplete="current-password"
+                          onBlur={(e) => {
+                            setFieldValue("password", e.target.value);
+                            setFieldTouched("password");
+                          }}
+                          onChange={(e) => {
+                            setFieldValue("password", e.target.value);
+                            setFieldTouched("password");
+                          }}
+                        />
+                        {touched.password && errors.password ? (
+                          <div className="FormError">{errors.password} </div>
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                    </Grid>
 
+                    <label className="input-label">
+                      {" "}
+                      <p>Profile picture*</p>
+                    </label>
                     <TextField
                       margin="normal"
                       required
@@ -326,7 +367,6 @@ const Register = ({ success, error, serviceActions }) => {
                       fullWidth
                       name="file"
                       id="file"
-                      label = "Profile picture"
                       value={values.file}
                       type="file"
                       onBlur={(e) => {
@@ -339,14 +379,18 @@ const Register = ({ success, error, serviceActions }) => {
                         setFieldTouched("file");
                       }}
                     />
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                    />
+
                     <FormButton
                       onClick={(e) => handChange(values)}
                       sx={{ mt: 3, mb: 2 }}
-                      disabled={errors.password || errors.email}
+                      disabled={
+                        !formik.dirty ||
+                        errors.firstname ||
+                        errors.lastname ||
+                        errors.username ||
+                        errors.user_type ||
+                        !touched.file
+                      }
                       size="large"
                       color="secondary"
                       fullWidth
