@@ -1,24 +1,30 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Button from './Button';
-import Typography from './Typography';
-import { FaCommentAlt, FaHeart, FaTrash, FaThumbsUp,FaPaintBrush } from "react-icons/fa";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Button from "./Button";
+import Typography from "./Typography";
+import {
+  FaCommentAlt,
+  FaHeart,
+  FaTrash,
+  FaThumbsUp,
+  FaPaintBrush,
+} from "react-icons/fa";
 
 const item = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   px: 5,
 };
 
 const number = {
   fontSize: 24,
-  fontFamily: 'default',
-  color: 'secondary.main',
-  fontWeight: 'medium',
+  fontFamily: "default",
+  color: "secondary.main",
+  fontWeight: "medium",
 };
 
 const image = {
@@ -27,32 +33,31 @@ const image = {
 };
 
 const background = {
-  color: "inheret"
-}
-
+  color: "inheret",
+};
 
 function ProductHowItWorks() {
   return (
     <Box
       component="section"
-      sx={{ display: 'flex', bgcolor: 'secondary.light', overflow: 'hidden' }}
+      sx={{ display: "flex", bgcolor: "secondary.light", overflow: "hidden" }}
     >
       <Container
         sx={{
           mt: 10,
           mb: 15,
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
         <Box
           component="img"
           alt="curvy lines"
           sx={{
-            pointerEvents: 'none',
-            position: 'absolute',
+            pointerEvents: "none",
+            position: "absolute",
             top: -180,
             opacity: 0.7,
           }}
@@ -68,14 +73,14 @@ function ProductHowItWorks() {
 
                 {/* <img class="wt-max-width-full wt-horizontal-center wt-vertical-center carousel-image wt-rounded" alt="Paint Brush Painting Home Improvement Decorating Wall House image 1" data-carousel-first-image="" src="https://i.etsystatic.com/27498402/r/il/7b320f/3058915850/il_794xN.3058915850_pm6v.jpg" srcset="https://i.etsystatic.com/27498402/r/il/7b320f/3058915850/il_794xN.3058915850_pm6v.jpg 1x, https://i.etsystatic.com/27498402/r/il/7b320f/3058915850/il_1588xN.3058915850_pm6v.jpg 2x" fetchpriority="high" data-original-image-width="1810" data-src-zoom-image="https://i.etsystatic.com/27498402/r/il/7b320f/3058915850/il_fullxfull.3058915850_pm6v.jpg" data-index="0"></img> */}
                 <Box
-               component="img"
+                  component="img"
                   src="https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400"
                   alt="graph"
                   sx={image}
                 />
-        
+
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                  Upload an image onto the website.
                 </Typography>
               </Box>
             </Grid>
@@ -89,8 +94,7 @@ function ProductHowItWorks() {
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so
-                  be quick.
+                  Find an artist to connect to.
                 </Typography>
               </Box>
             </Grid>
@@ -104,8 +108,8 @@ function ProductHowItWorks() {
                   sx={image}
                 />
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  Sit back and enjoy while the artist paints and ships your new
+                  custom artwork in 2-4 weeks.
                 </Typography>
               </Box>
             </Grid>
@@ -116,7 +120,7 @@ function ProductHowItWorks() {
           size="large"
           variant="contained"
           component="a"
-          href="/premium-themes/onepirate/sign-up/"
+          href="/register"
           sx={{ mt: 8 }}
         >
           Get started
