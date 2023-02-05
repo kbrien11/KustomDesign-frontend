@@ -2,42 +2,76 @@ import React, { useState, useEffect } from "react";
 import Images from "./Image";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import * as imageActions from './actions/imageActionTypes'
-
-import {connect} from 'react-redux'
+import * as imageActions from "./actions/imageActionTypes";
+import ProductHero from "./components/ArtistProfilePageProductHero";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Divider from "@mui/material/Divider";
+import { ArtistProfilePageMenuItems } from "./components/ArtistProfilePageMenuItems";
+import ProductHeroLayout from "./components/ProductHeroLayout";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 
-const ArtistProfilePage = ({ images, serviceActions }) => {
-  const [profileImage, setProfileImage] = useState("");
+import theme from "./components/theme";
+import AppAppBar from "./components/AppAppBar";
+import MuiDrawer from "@mui/material/Drawer";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
 
+import AppFooter from "./components/AppFooter";
+
+const ArtistProfilePage = ({
+  images,
+  serviceActions,
+  profileImage,
+  firstName,
+  lastName,
+  sessionId,
+}) => {
   const { name } = useParams();
-  const artistid = sessionStorage.getItem("artistid");
+  const artistid = sessionStorage.getItem("loggedInPK");
+  console.log(sessionId);
+  const backgroundImage =
+    "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&amp;w=1000&amp;q=80";
 
   useEffect(() => {
-    serviceActions.getImageDataForArtist(artistid,name);
+    serviceActions.getImageDataForArtist(artistid, name);
   }, []);
   useEffect(() => {
-    getProfilePicture();
+    serviceActions.getArtistProfilePicture(artistid, name);
   }, []);
-
-  const getProfilePicture = async () => {
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/artistProfilePiceture/${artistid}/${name}`
-      );
-      const res = await response.json();
-      if (res) {
-        setProfileImage(res.data);
-      }
-    } catch (error) {
-      console.log("error with profile picture");
-    }
-  };
-
 
   const imageMap = images.map((img) => {
     return <Images data={img} />;
   });
+
+  const drawerWidth = 240;
+
+  const Drawer = styled(MuiDrawer, {
+    shouldForwardProp: (prop) => prop !== "open",
+  })(({ theme, open }) => ({
+    "& .MuiDrawer-paper": {
+      position: "relative",
+      whiteSpace: "nowrap",
+      width: drawerWidth,
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      boxSizing: "border-box",
+      ...(!open && {
+        overflowX: "hidden",
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up("sm")]: {
+          width: theme.spacing(9),
+        },
+      }),
+    },
+  }));
 
   const starRatingOutput = <FaStar backgroundColor="white" />;
   const stars = [];
@@ -46,26 +80,52 @@ const ArtistProfilePage = ({ images, serviceActions }) => {
   }
 
   return (
-    <div>
-      <div className="artistProfilePage">
-        <img src={profileImage} width="100" height="190"></img>
-        <p>{stars} <span> Matches: {imageMap.length}</span></p>
-        {images.length > 0 && (
-          <div>
-            <h3>Matches</h3>
-            <div class="grid-wrapper">
-              <div class="grid-container">{imageMap}</div>
-            </div>
+    <div className="artistProfilePageBackground">
+      <ThemeProvider theme={theme}>
+        <AppAppBar />
+        <div className="displayDashboardGrid">
+          <div className="menuItem">
+            {" "}
+            <p>{ArtistProfilePageMenuItems}</p>
           </div>
-        )}
-      </div>
+          <div className="artistContentGrid">
+            <Typography
+              color="inherit"
+              align="center"
+              variant="h5"
+              sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+            >
+              <div className="artistProfilePage">
+                <div className="artistProfilePageContainer">
+                  <h5 className="AristFirstName">
+                    {firstName}{" "}
+                    <span className="ArtistLastName">{lastName}</span>
+                  </h5>
+                  <img src={profileImage} width="50" height="150"></img>
+                  <p>{stars}</p> <br />
+                  <h4>Matches: {imageMap.length}</h4>
+                </div>
+              </div>
+            </Typography>
+
+            {images.length > 0 && (
+              <div className="grid-wrapper-container">
+                <div className="grid-wrapper">{imageMap}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </ThemeProvider>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   images: state.imageReducer.images,
-  showDetails:state.imageReducer.showDetails
+  profileImage: state.imageReducer.profileImage,
+  sessionId: state.loginReducer.id,
+  firstName: state.imageReducer.firstName,
+  lastName: state.imageReducer.lastName,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -6,15 +6,28 @@ import * as imageActions from "./actions/imageActionTypes";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-const ArtistPage = ({ images, serviceActions , showDetails,type}) => {
+const ArtistPage = ({
+  images,
+  serviceActions,
+  showDetails,
+  type,
+  profileImage,
+}) => {
   useEffect(() => {
     serviceActions.getImageData();
   }, []);
 
-  console.log(showDetails)
+  console.log(profileImage);
 
   const imageMap = images.map((img) => {
-    return <Images data={img} showDetails = {showDetails} id={sessionStorage.getItem('loggedInPK')} type = {type}/>;
+    return (
+      <Images
+        data={img}
+        showDetails={showDetails}
+        id={sessionStorage.getItem("loggedInPK")}
+        type={type}
+      />
+    );
   });
 
   const navigate = useNavigate();
@@ -49,8 +62,8 @@ const ArtistPage = ({ images, serviceActions , showDetails,type}) => {
 
 const mapStateToProps = (state) => ({
   images: state.imageReducer.images,
-  showDetails:state.imageReducer.showDetails,
-    type:state.loginReducer.user_type
+  profileImage: state.loginReducer.profile_image,
+  type: state.loginReducer.user_type,
 });
 
 const mapDispatchToProps = (dispatch) => ({
