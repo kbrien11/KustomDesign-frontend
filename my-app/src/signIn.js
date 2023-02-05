@@ -44,7 +44,7 @@ function Copyright(props) {
 
 // const theme = createTheme();
 
-function SignIn({ userType, id, serviceActions }) {
+function SignIn({ userType, id, serviceActions, isError, errorMessage }) {
   useEffect(() => {
     console.log(userType);
     check(userType);
@@ -63,11 +63,20 @@ function SignIn({ userType, id, serviceActions }) {
       navigate("/user");
     }
     if (userActionType === "Artist") {
-      navigate("/artist");
+      navigate(`/artistProfilePage/${id}`);
     }
   };
   const handleSubmit = (formdata) => {
     serviceActions.login(formdata);
+  };
+
+  const resetError = () => {
+    serviceActions.resetRegisterFailure();
+  };
+
+  const resetValues = (formValues) => {
+    formValues.email = "";
+    formValues.password = "";
   };
 
   return (
@@ -78,6 +87,7 @@ function SignIn({ userType, id, serviceActions }) {
         initialValues={init}
         onSubmit={(formData) => {
           handleSubmit(formData);
+          resetValues(formData);
         }}
       >
         {(formik) => {
@@ -86,6 +96,7 @@ function SignIn({ userType, id, serviceActions }) {
             setFieldTouched,
             setFieldValue,
             isValid,
+            resetForm,
             dirty,
             touched,
             errors,
@@ -95,124 +106,177 @@ function SignIn({ userType, id, serviceActions }) {
             <Container component="main" maxWidth="md">
               <AppForm>
                 <CssBaseline />
-
-                <Box
-                  sx={{
-                    marginTop: 8,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography
-                    variant="h3"
-                    gutterBottom
-                    marked="center"
-                    align="center"
-                  >
-                    Sign in
-                  </Typography>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-
+                {isError && (
                   <Box
                     sx={{
                       marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      borderRadius: "8px",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    {/* <Form onSubmit={LoginButton}> */}
-                    <TextField
-                      value={values.email}
-                      fullWidth
-                      id="email"
-                      label="Email Address"
-                      name={"email"}
-                      onBlur={(e) => {
-                        setFieldValue("email", e.target.value);
-                        setFieldTouched("email");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("email", e.target.value);
-                        setFieldTouched("email");
-                      }}
-
-                      //   onChange={(e) => setInputEmail(e.target.value)}
-                    />
-                    {touched.email && errors.email ? (
-                      <div className="FormError">{errors.email} </div>
-                    ) : (
-                      ""
+                    {isError && (
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        marked="center"
+                        align="center"
+                        color="black"
+                      >
+                        {errorMessage}
+                      </Typography>
                     )}
-                    <TextField
-                      margin="normal"
-                      required
-                      size="xlarge"
-                      fullWidth
-                      value={values.password}
-                      name={"password"}
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      onBlur={(e) => {
-                        setFieldValue("password", e.target.value);
-                        setFieldTouched("password");
-                      }}
-                      onChange={(e) => {
-                        setFieldValue("password", e.target.value);
-                        setFieldTouched("password");
-                      }}
-                    />
-                    {touched.password && errors.password ? (
-                      <div className="FormError">{errors.password} </div>
-                    ) : (
-                      ""
-                    )}
+                    {isError && (
+                      <FormButton
+                        onClick={(e) => {
+                          resetForm({
+                            vales: init,
+                          });
+                          resetError(values);
+                        }}
+                        sx={{ mt: 3, mb: 2 }}
+                        // disabled={
+                        //   errors.password ||
+                        //   errors.email ||
+                        //   !touched.password ||
+                        //   !touched.email
+                        // }
 
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="primary" />}
-                      label="Remember me"
-                    />
-                    <FormButton
-                      onClick={(e) => handleSubmit(values)}
-                      sx={{ mt: 3, mb: 2 }}
-                      // disabled={
-                      //   errors.password ||
-                      //   errors.email ||
-                      //   !touched.password ||
-                      //   !touched.email
-                      // }
-                      disabled={
-                        !formik.dirty || errors.email || errors.password
-                      }
-                      size="large"
-                      color="secondary"
-                      fullWidth
-                      type="submit"
-                    >
-                      Submit
-                    </FormButton>
-                    <Grid container>
-                      <Grid item xs>
-                        <Link href="#" variant="body2">
-                          Forgot password?
-                        </Link>
-                      </Grid>
-                      <Grid item></Grid>
-                    </Grid>
-                    {/* </Form> */}
+                        size="large"
+                        color="secondary"
+                        fullWidth
+                        type="submit"
+                      >
+                        Try again here
+                      </FormButton>
+                    )}
                   </Box>
-                </Box>
+                )}
+                {!isError && (
+                  <Box
+                    sx={{
+                      marginTop: 8,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="h3"
+                      gutterBottom
+                      marked="center"
+                      align="center"
+                    >
+                      Sign in
+                    </Typography>
+                    <Link href="/register" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
 
-                <Copyright sx={{ mt: 8, mb: 4 }} />
+                    <Box
+                      sx={{
+                        marginTop: 8,
+                      }}
+                    >
+                      {/* <Form onSubmit={LoginButton}> */}
+                      <TextField
+                        value={values.email}
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name={"email"}
+                        onBlur={(e) => {
+                          setFieldValue("email", e.target.value);
+                          setFieldTouched("email");
+                        }}
+                        onChange={(e) => {
+                          setFieldValue("email", e.target.value);
+                          setFieldTouched("email");
+                        }}
+
+                        //   onChange={(e) => setInputEmail(e.target.value)}
+                      />
+                      {touched.email && errors.email ? (
+                        <div className="FormError">{errors.email} </div>
+                      ) : (
+                        ""
+                      )}
+                      <TextField
+                        margin="normal"
+                        required
+                        size="xlarge"
+                        fullWidth
+                        value={values.password}
+                        name={"password"}
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onBlur={(e) => {
+                          setFieldValue("password", e.target.value);
+                          setFieldTouched("password");
+                        }}
+                        onChange={(e) => {
+                          setFieldValue("password", e.target.value);
+                          setFieldTouched("password");
+                        }}
+                      />
+                      {touched.password && errors.password ? (
+                        <div className="FormError">{errors.password} </div>
+                      ) : (
+                        ""
+                      )}
+
+                      <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Remember me"
+                      />
+                      <FormButton
+                        onClick={(e) => handleSubmit(values)}
+                        sx={{ mt: 3, mb: 2 }}
+                        // disabled={
+                        //   errors.password ||
+                        //   errors.email ||
+                        //   !touched.password ||
+                        //   !touched.email
+                        // }
+                        disabled={
+                          !formik.dirty ||
+                          errors.email ||
+                          errors.password ||
+                          isError
+                        }
+                        size="large"
+                        color="secondary"
+                        fullWidth
+                        type="submit"
+                      >
+                        Submit
+                      </FormButton>
+                      <Grid container>
+                        <Grid item xs>
+                          <Link href="#" variant="body2">
+                            Forgot password?
+                          </Link>
+                        </Grid>
+                        <Grid item></Grid>
+                      </Grid>
+                      {/* </Form> */}
+                    </Box>
+                  </Box>
+                )}
+
+                {!isError && <Copyright sx={{ mt: 8, mb: 4 }} />}
               </AppForm>
             </Container>
           );
         }}
       </Formik>
-      <AppFooter />
+      {!isError && <AppFooter />}
     </ThemeProvider>
   );
 }
@@ -220,6 +284,8 @@ function SignIn({ userType, id, serviceActions }) {
 const mapStateToProps = (state) => ({
   userType: state.loginReducer.user_type,
   id: state.loginReducer.id,
+  isError: state.loginReducer.error,
+  errorMessage: state.loginReducer.errorMessage,
 });
 
 const mapDispatchToProps = (dispatch) => ({

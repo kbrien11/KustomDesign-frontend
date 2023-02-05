@@ -16,6 +16,8 @@ import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import Grid from "@mui/material/Grid";
+
 import * as loginActions from "./actions/LoginActionTypes";
 
 const Images = (props) => {
@@ -27,6 +29,8 @@ const Images = (props) => {
   const image_id = props.data.id;
 
   console.log(`userpk/${props.type}`);
+
+  console.log(props);
 
   useEffect(() => {
     getUserNames();
@@ -145,15 +149,17 @@ const Images = (props) => {
       {props.showDetails === true ? (
         <Card sx={{ maxWidth: 345 }} rowSpacing={5}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="240"
-              image={props.data.image}
-              alt="green iguana"
-            />
+            <a target="_blank" href={props.data.image}>
+              <CardMedia
+                component="img"
+                height="240"
+                image={props.data.image}
+                alt="green iguana"
+              />
+            </a>
             <CardContent>
               <Typography variant="body2" color="text.secondary">
-                {props.type === 'User'|| props.type ===' User' ? (
+                {props.type === "User" || props.type === " User" ? (
                   <h4>
                     {" "}
                     like{" "}
@@ -171,9 +177,11 @@ const Images = (props) => {
                       </span>
                     </span>
                   </h4>
-                ) : '' }
-                
-                {props.type === 'User'|| props.type ===' User' ? (
+                ) : (
+                  ""
+                )}
+
+                {props.type === "User" || props.type === " User" ? (
                   <div className="userGrid">
                     <div className="likes">
                       {" "}
@@ -199,9 +207,11 @@ const Images = (props) => {
                       </span>
                     </div>{" "}
                   </div>
-                ):" "}
+                ) : (
+                  " "
+                )}
 
-                {props.type != 'Artist' && (
+                {props.type != "Artist" && (
                   <div classname="profile-button">{userNameMap}</div>
                 )}
               </Typography>
@@ -209,7 +219,45 @@ const Images = (props) => {
           </CardActionArea>
         </Card>
       ) : (
-        ""
+        <Grid paddingRight="30px">
+          <Card
+            sx={{
+              maxWidth: 375,
+              borderRadius: "7px",
+              marginBottom: "25px",
+              minWidth: 300,
+              paddingBottom: "24px",
+            }}
+            xs={12}
+            sm={6}
+            md={2}
+          >
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="240"
+                image={props.data.image}
+                alt="green iguana"
+              />
+            </CardActionArea>
+            <Typography
+              color="inherit"
+              align="left"
+              variant="h6"
+              sx={{ paddingLeft: "20px", paddingTop: "20px" }}
+            >
+              Username
+            </Typography>
+            <Typography
+              color="inherit"
+              align="left"
+              variant="h7"
+              sx={{ paddingRight: "20px", float: "right" }}
+            >
+              $100.00
+            </Typography>
+          </Card>
+        </Grid>
       )}
 
       <div className="MatchAdded">
