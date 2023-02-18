@@ -34,7 +34,6 @@ export const imageServices = {
     fetch(apiConstants.GET_IMAGE_DATA)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.images);
         if (response.images.length > 0) {
           dispatch(loadImagesData(response.images));
           dispatch(loadShowDetails(response.showDetails));
