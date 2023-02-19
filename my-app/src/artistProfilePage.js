@@ -103,7 +103,7 @@ const ArtistProfilePage = ({
                   </h5>
                   <img src={profileImage} width="50" height="150"></img>
                   <p>{stars}</p> <br />
-                  <h4>Matches: {imageMap.length}</h4>
+                  <h4>Paintings: {imageMap.length}</h4>
                 </div>
               </div>
             </Typography>
