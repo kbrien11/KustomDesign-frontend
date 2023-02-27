@@ -95,3 +95,14 @@ code {
   font-weight: bolder;
   font-family: 'Times New Roman', Times, serif;
 }
+.addedImageText{
+  width: 50%;
+  padding: 20px 20px 20px 20px;
+  background-color: rgb(142, 223, 142);
+}
+.addedImageText h5{
+  text-align: center;
+  color: black;
+  font-family: 'Times New Roman', Times, serif;
+
+}

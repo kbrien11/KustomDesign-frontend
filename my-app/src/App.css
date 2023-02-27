@@ -115,26 +115,15 @@
   min-height: 400px;
   margin: auto;
   border-radius: 8px;
-  padding: 10px 10px 10px 10px;
+ 
   margin-top: 5%;
+  padding-right: 150px;
+  padding-top: 1px;
   background-color: white;
   transition: 0.3s;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-.addImageContainer form{
-  float: right;
-}
-.addImageContainer h4{
-  float: right;
-  padding: 12px 12px 12px 12px;
-  background-color: rgb(128, 162, 203);
-  border-radius: 5px;
-}
-.input{
-  margin-top: -10px;
-  background-color: rgb(40, 105, 129);
-  padding: 12px 12px 12px 12px;
-}
+
 .expand-button{
   background-color: inherit;
   border: inherit;
@@ -289,6 +278,21 @@ background-color: rgb(241, 238, 238)
   font-weight: bold;
   margin-bottom: -7px;
 }
+.Select-input-label-add-image {
+  margin-top: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+}
+.input-label-add-image{
+    margin-top: 6px;
+}
+.input-label-add-image p{
+  font-size: 13px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #15824B;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
 .artistContentGrid{
   margin-left: 40%;
 }
@@ -312,4 +316,70 @@ background-color: rgb(241, 238, 238)
     font-size: 20px;
     color: black;
     display: block;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #1FB264;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #1FB264;
+  border: 4px dashed #ffffff;
+}
+.file-upload-input {
+position: absolute;
+  margin-right: 50px;
+  padding: 0;
+  min-width: 500px;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #15824B;
+  padding: 60px 0;
+}
+.addedImageText {
+  width: 50%;
+  margin: auto;
+  padding: 7px 7px 7px 7px;
+  background-color: rgb(142, 223, 142);
+  margin-top: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.addedImageText h5 {
+  text-align: center;
+  color: black;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+.ImageLoadingText {
+  width: 50%;
+  margin: auto;
+  padding: 7px 7px 7px 7px;
+  background-color: rgb(249, 166, 150);
+  margin-top: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.ImageLoadingText h5 {
+  text-align: center;
+  color: black;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
+
 }

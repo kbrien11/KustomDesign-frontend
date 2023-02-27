@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebaseConfig";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import * as imageActions from "./actions/imageActionTypes";
 
-const Test = () => {
+import { FaPlus, FaMinus } from "react-icons/fa";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Select } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import FormButton from "./components/FormButton";
+
+import MenuItem from "@mui/material/MenuItem";
+
+const Test = (
+  images,
+  serviceActions,
+  profileImage,
+  firstName,
+  lastName,
+  sessionId
+) => {
   const [inputImage, setInputimage] = useState("");
-  const [toggleImage, setimageToggle] = useState(false);
-  const [toggleSize, setSizeToggle] = useState(false);
   const [addedImage, setAddedImageText] = useState(false);
   const [inputSize, setInputSize] = useState("");
   const [inputPrice, setInputPrice] = useState("");
@@ -15,10 +29,13 @@ const Test = () => {
 
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handChange = (e) => {
     e.preventDefault();
-    const file = e.target[0].files[0];
+    console.log(e);
+    const file = e.target[4].files[0];
+    console.log(file);
 
     addImage(file);
   };
@@ -27,6 +44,7 @@ const Test = () => {
 
   const addImage = async (file) => {
     if (!file) return;
+    setLoading(true);
     const sotrageRef = ref(storage, `files/${file.name}`);
     const uploadTask = uploadBytesResumable(sotrageRef, file);
     console.log(sotrageRef);
@@ -44,8 +62,8 @@ const Test = () => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           imgPath += downloadURL;
-          const userid = sessionStorage.getItem("userpk");
-          const endpoint = `http://127.0.0.1:8000/api/uploadImage/${userid}`;
+          const userId = sessionStorage.getItem("loggedInPK");
+          const endpoint = `http://127.0.0.1:8000/api/uploadImage/${userId}`;
           const data = {
             image: imgPath,
             size: inputSize,
@@ -63,6 +81,7 @@ const Test = () => {
           console.log(res);
           if (res) {
             setAddedImageText(true);
+            setLoading(false);
           }
           console.log(imgPath);
           setProgress(0);
@@ -71,154 +90,123 @@ const Test = () => {
     );
   };
 
-  const toggleImageButtonOn = () => {
-    console.log("clicked");
-    setimageToggle(true);
-  };
-  const toggleImageButtonOff = () => {
-    console.log("clicked");
-    setimageToggle(false);
-  };
+  const checkPrice = (size) => {
+    switch (size) {
+      case "8 x 8":
+        return `$${parseFloat("50.0").toFixed(2)}`;
 
-  const toggleSizeButtonOn = () => {
-    console.log("clicked");
-    setSizeToggle(true);
-  };
-  const toggleSizeButtonOff = () => {
-    console.log("clicked");
-    setSizeToggle(false);
+      case "10 x 10":
+        return `$${parseFloat("100.0").toFixed(2)}`;
+
+      case "12 x 12":
+        return `$${parseFloat("150.0").toFixed(2)}`;
+
+      case "14 x 14":
+        return `$${parseFloat("200.0").toFixed(2)}`;
+
+      case "16 x 16":
+        return `$${parseFloat("250.0").toFixed(2)}`;
+      default:
+        return `$${parseFloat("0").toFixed(2)}`;
+    }
   };
 
   return (
     <div>
       <div className="addImageContainer">
-        <div className="image-size-inputs">
-          {!toggleImage ? (
-            <div>
-              <h4>
-                {" "}
-                1){" "}
-                <span>
-                  {" "}
-                  Upload image{" "}
-                  <span>
-                    <button
-                      className="expand-button"
-                      onClick={(e) => toggleImageButtonOn()}
-                    >
-                      {" "}
-                      Expand{" "}
-                      <span>
-                        {" "}
-                        <FaPlus />
-                      </span>
-                    </button>
-                  </span>
-                </span>{" "}
-              </h4>
-            </div>
-          ) : (
-            <div>
-              <h4>
-                {" "}
-                1){" "}
-                <span>
-                  {" "}
-                  Upload image{" "}
-                  <span>
-                    <button
-                      className="expand-button"
-                      onClick={(e) => toggleImageButtonOff()}
-                    >
-                      {" "}
-                      Close{" "}
-                      <span>
-                        {" "}
-                        <FaMinus />
-                      </span>
-                    </button>
-                  </span>
-                </span>{" "}
-              </h4>
-            </div>
-          )}{" "}
-          <br />
-          {!toggleSize ? (
-            <div>
-              <h4>
-                {" "}
-                2){" "}
-                <span>
-                  {" "}
-                  Select Size{" "}
-                  <span>
-                    <button
-                      className="expand-button"
-                      onClick={(e) => toggleSizeButtonOn()}
-                    >
-                      {" "}
-                      Expand{" "}
-                      <span>
-                        {" "}
-                        <FaPlus />
-                      </span>
-                    </button>
-                  </span>
-                </span>{" "}
-              </h4>
-            </div>
-          ) : (
-            <div>
-              <h4>
-                {" "}
-                2){" "}
-                <span>
-                  {" "}
-                  Select Size{" "}
-                  <span>
-                    <button
-                      className="expand-button"
-                      onClick={(e) => toggleSizeButtonOff()}
-                    >
-                      {" "}
-                      Close{" "}
-                      <span>
-                        {" "}
-                        <FaMinus />
-                      </span>
-                    </button>
-                  </span>
-                </span>{" "}
-              </h4>
-            </div>
-          )}{" "}
-        </div>
-
         <form onSubmit={handChange}>
-          {toggleImage && <input type="file" className="input" />}
+          <label className="input-label-add-image">
+            {" "}
+            <p>Size*</p>
+          </label>
+          <Select
+            margin="normal"
+            required
+            size="xlarge"
+            fullWidth
+            value={inputSize}
+            name={"size"}
+            type="text"
+            id="user_type"
+            onChange={(e) => {
+              setInputSize(e.target.value);
+              setInputPrice(checkPrice(e.target.value));
+            }}
+          >
+            <MenuItem value={"8 x 8"}>8 x 8</MenuItem>
+            <MenuItem value={"10 x 10"}>10 x 10</MenuItem>
+            <MenuItem value={"12 x 12"}>12 x 12</MenuItem>
+            <MenuItem value={"14 x 14"}>14 x 14</MenuItem>
+            <MenuItem value={"16 x 16"}>16 x 16</MenuItem>
+          </Select>
+
           <br />
-          {toggleSize && (
+          <label className="input-label-add-image">
+            {" "}
+            <p>Estimated Price*</p>
+          </label>
+          <TextField
+            margin="normal"
+            required
+            size="xlarge"
+            fullWidth
+            value={inputPrice}
+            name={"price"}
+            type="text"
+            id="price"
+            autoComplete="estinated price"
+          />
+          <br />
+          <div class="image-upload-wrap">
             <input
-              type="text"
-              placeholder="Size.."
-              onChange={(e) => setInputSize(e.target.value)}
+              class="file-upload-input"
+              value={inputImage}
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                setInputimage(e.target.value);
+              }}
             />
-          )}{" "}
-          <br />
-          {toggleSize && (
-            <input
-              type="text"
-              placeholder="Price.."
-              onChange={(e) => setInputPrice(e.target.value)}
-            />
-          )}{" "}
-          <br />
-          <button type="submit">Upload</button>
-          {addedImage && <h5> Congrats! Image added</h5>}
+            <div class="drag-text">
+              {inputImage.length === 0 ? (
+                <h3>select add Image</h3>
+              ) : (
+                <h3>Image selected</h3>
+              )}
+            </div>
+          </div>
+
+          <FormButton type="submit">Upload</FormButton>
         </form>
       </div>
+      {loading && (
+        <div className="ImageLoadingText">
+          <h5> Trying to save image</h5>
+        </div>
+      )}
+
+      {addedImage && (
+        <div className="addedImageText">
+          <h5> Image added</h5>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Test;
+const mapStateToProps = (state) => ({
+  images: state.imageReducer.images,
+  profileImage: state.imageReducer.profileImage,
+  sessionId: state.loginReducer.id,
+  firstName: state.imageReducer.firstName,
+  lastName: state.imageReducer.lastName,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  serviceActions: bindActionCreators(
+    { ...imageActions.imageServices },
+    dispatch
+  ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Test);
