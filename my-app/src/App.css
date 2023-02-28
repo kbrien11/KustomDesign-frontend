@@ -367,13 +367,18 @@ position: absolute;
 
 }
 .ImageLoadingText {
-  width: 50%;
-  margin: auto;
-  padding: 7px 7px 7px 7px;
-  background-color: rgb(249, 166, 150);
-  margin-top: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  min-width: 600px;
+    max-width: 600px;
+    min-height: 400px;
+    margin: auto;
+    border-radius: 8px;
+
+    margin-top: 5%;
+    padding-right: 150px;
+    padding-top: 1px;
+    background-color: white;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .ImageLoadingText h5 {
@@ -381,5 +386,6 @@ position: absolute;
   color: black;
   font-size: 17px;
   font-family: 'Times New Roman', Times, serif;
+  margin-top: 30px;
 
 }

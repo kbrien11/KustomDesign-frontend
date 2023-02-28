@@ -62,6 +62,7 @@ const Test = (
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           imgPath += downloadURL;
+
           const userId = sessionStorage.getItem("loggedInPK");
           const endpoint = `http://127.0.0.1:8000/api/uploadImage/${userId}`;
           const data = {
@@ -82,6 +83,8 @@ const Test = (
           if (res) {
             setAddedImageText(true);
             setLoading(false);
+            setInputPrice("");
+            setInputSize("");
           }
           console.log(imgPath);
           setProgress(0);
@@ -93,92 +96,97 @@ const Test = (
   const checkPrice = (size) => {
     switch (size) {
       case "8 x 8":
-        return `$${parseFloat("50.0").toFixed(2)}`;
+        return `$${parseFloat(50.0).toFixed(2)}`;
 
       case "10 x 10":
-        return `$${parseFloat("100.0").toFixed(2)}`;
+        return `$${parseFloat(100.0).toFixed(2)}`;
 
       case "12 x 12":
-        return `$${parseFloat("150.0").toFixed(2)}`;
+        return `$${parseFloat(150.0).toFixed(2)}`;
 
       case "14 x 14":
-        return `$${parseFloat("200.0").toFixed(2)}`;
+        return `$${parseFloat(200.0).toFixed(2)}`;
 
       case "16 x 16":
-        return `$${parseFloat("250.0").toFixed(2)}`;
+        return `$${parseFloat(250.0).toFixed(2)}`;
       default:
-        return `$${parseFloat("0").toFixed(2)}`;
+        return `$${parseFloat(0).toFixed(2)}`;
     }
   };
 
   return (
     <div>
-      <div className="addImageContainer">
-        <form onSubmit={handChange}>
-          <label className="input-label-add-image">
-            {" "}
-            <p>Size*</p>
-          </label>
-          <Select
-            margin="normal"
-            required
-            size="xlarge"
-            fullWidth
-            value={inputSize}
-            name={"size"}
-            type="text"
-            id="user_type"
-            onChange={(e) => {
-              setInputSize(e.target.value);
-              setInputPrice(checkPrice(e.target.value));
-            }}
-          >
-            <MenuItem value={"8 x 8"}>8 x 8</MenuItem>
-            <MenuItem value={"10 x 10"}>10 x 10</MenuItem>
-            <MenuItem value={"12 x 12"}>12 x 12</MenuItem>
-            <MenuItem value={"14 x 14"}>14 x 14</MenuItem>
-            <MenuItem value={"16 x 16"}>16 x 16</MenuItem>
-          </Select>
-
-          <br />
-          <label className="input-label-add-image">
-            {" "}
-            <p>Estimated Price*</p>
-          </label>
-          <TextField
-            margin="normal"
-            required
-            size="xlarge"
-            fullWidth
-            value={inputPrice}
-            name={"price"}
-            type="text"
-            id="price"
-            autoComplete="estinated price"
-          />
-          <br />
-          <div class="image-upload-wrap">
-            <input
-              class="file-upload-input"
-              value={inputImage}
-              type="file"
-              accept="image/*"
+      {!loading && (
+        <div className="addImageContainer">
+          <form onSubmit={handChange}>
+            <label className="input-label-add-image">
+              {" "}
+              <p>Size*</p>
+            </label>
+            <Select
+              margin="normal"
+              required
+              size="xlarge"
+              fullWidth
+              value={inputSize}
+              name={"size"}
+              type="text"
+              id="user_type"
               onChange={(e) => {
-                setInputimage(e.target.value);
+                setInputSize(e.target.value);
+                setInputPrice(checkPrice(e.target.value));
               }}
-            />
-            <div class="drag-text">
-              {inputImage.length === 0 ? (
-                <h3>select add Image</h3>
-              ) : (
-                <h3>Image selected</h3>
-              )}
-            </div>
-          </div>
+            >
+              <MenuItem value={"8 x 8"}>8 x 8</MenuItem>
+              <MenuItem value={"10 x 10"}>10 x 10</MenuItem>
+              <MenuItem value={"12 x 12"}>12 x 12</MenuItem>
+              <MenuItem value={"14 x 14"}>14 x 14</MenuItem>
+              <MenuItem value={"16 x 16"}>16 x 16</MenuItem>
+            </Select>
 
-          <FormButton type="submit">Upload</FormButton>
-        </form>
-      </div>
+            <br />
+            <label className="input-label-add-image">
+              {" "}
+              <p>Estimated Price*</p>
+            </label>
+            <TextField
+              margin="normal"
+              required
+              size="xlarge"
+              fullWidth
+              value={inputPrice}
+              name={"price"}
+              type="text"
+              id="price"
+              autoComplete="estimated price"
+            />
+            <br />
+            <div class="image-upload-wrap">
+              <input
+                class="file-upload-input"
+                // value={inputImage}
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  setInputimage(e.target.value);
+                }}
+              />
+              <div class="drag-text">
+                {inputImage.length === 0 ? (
+                  <h3>select add Image</h3>
+                ) : (
+                  <h3>Image selected</h3>
+                )}
+              </div>
+            </div>
+
+            <FormButton type="submit" disabled={inputImage.length < 1}>
+              {" "}
+              Upload
+            </FormButton>
+          </form>
+        </div>
+      )}
       {loading && (
         <div className="ImageLoadingText">
           <h5> Trying to save image</h5>
