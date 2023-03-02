@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebaseConfig";
 import * as imageActions from "./actions/imageActionTypes";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -85,12 +85,22 @@ const Test = (
             setLoading(false);
             setInputPrice("");
             setInputSize("");
+            setInputimage("");
+            setTimeout(() => {
+              resetAddedImageText();
+            }, 5000);
           }
           console.log(imgPath);
           setProgress(0);
         });
       }
     );
+  };
+
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
   };
 
   const checkPrice = (size) => {
@@ -114,10 +124,20 @@ const Test = (
     }
   };
 
+  const resetAddedImageText = () => {
+    setAddedImageText(false);
+  };
+
   return (
     <div>
+      {addedImage && (
+        <div className="addedImageText">
+          <h5> Image added</h5>
+        </div>
+      )}
       {!loading && (
         <div className="addImageContainer">
+          <h4> Upload Image</h4>
           <form onSubmit={handChange}>
             <label className="input-label-add-image">
               {" "}
@@ -180,7 +200,11 @@ const Test = (
               </div>
             </div>
 
-            <FormButton type="submit" disabled={inputImage.length < 1}>
+            <FormButton
+              className="imageUploadButton"
+              type="submit"
+              disabled={inputImage.length < 1}
+            >
               {" "}
               Upload
             </FormButton>
@@ -190,12 +214,17 @@ const Test = (
       {loading && (
         <div className="ImageLoadingText">
           <h5> Trying to save image</h5>
-        </div>
-      )}
-
-      {addedImage && (
-        <div className="addedImageText">
-          <h5> Image added</h5>
+          <div>
+            {" "}
+            <ClipLoader
+              color={"red"}
+              loading={loading}
+              cssOverride={override}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          </div>
         </div>
       )}
     </div>

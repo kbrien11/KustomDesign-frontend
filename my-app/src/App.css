@@ -115,15 +115,23 @@
   min-height: 400px;
   margin: auto;
   border-radius: 8px;
- 
-  margin-top: 5%;
+  margin-bottom: 40px;
+  padding-bottom: 80px;
+  margin-top: 2%;
   padding-right: 150px;
   padding-top: 1px;
   background-color: white;
   transition: 0.3s;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
+.addImageContainer h4{
+  margin: auto;
+  font-size: 30px;
+  text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 50px;
+  margin-bottom: -15%;
+}
 .expand-button{
   background-color: inherit;
   border: inherit;
@@ -322,6 +330,7 @@ background-color: rgb(241, 238, 238)
   margin-top: 20px;
   border: 4px dashed #1FB264;
   position: relative;
+    margin-bottom: 10px;
 }
 
 .image-dropping,
@@ -350,13 +359,13 @@ position: absolute;
   padding: 60px 0;
 }
 .addedImageText {
-  width: 50%;
+  width: 40%;
   margin: auto;
-  padding: 7px 7px 7px 7px;
+  padding: 3px 3px 3px 3px;
   background-color: rgb(142, 223, 142);
-  margin-top: 10px;
+  margin-top: 30px;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .addedImageText h5 {
@@ -388,4 +397,11 @@ position: absolute;
   font-family: 'Times New Roman', Times, serif;
   margin-top: 30px;
 
+}
+
+.imageUploadButton{
+  margin: auto;
+  width: 50%;
+  
+  margin-top: 10px;
 }
