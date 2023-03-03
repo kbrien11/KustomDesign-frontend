@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Images from "./Image";
+import Images from "../Image/Image";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import * as imageActions from "./actions/imageActionTypes";
-import ProductHero from "./components/ArtistProfilePageProductHero";
+import * as imageActions from "../../actions/imageActionTypes";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Divider from "@mui/material/Divider";
-import { ArtistProfilePageMenuItems } from "./components/ArtistProfilePageMenuItems";
-import ProductHeroLayout from "./components/ProductHeroLayout";
+import { ArtistProfilePageMenuItems } from "../cssComponents/ArtistProfilePageMenuItems";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-
-import theme from "./components/theme";
-import AppAppBar from "./components/AppAppBar";
+import theme from "../cssComponents/theme";
+import AppAppBar from "../cssComponents/AppAppBar";
 import MuiDrawer from "@mui/material/Drawer";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-
-import AppFooter from "./components/AppFooter";
 
 const ArtistProfilePage = ({
   images,

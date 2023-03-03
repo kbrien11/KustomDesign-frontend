@@ -1,6 +1,6 @@
 import * as React from "react";
-import Button from "../components/Button";
-import Typography from "../components/Typography";
+import Button from "./Button";
+import Typography from "./Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
 
 const backgroundImage =

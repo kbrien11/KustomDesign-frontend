@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Images from "./Image";
+import Images from "../Image/Image";
 import { useNavigate } from "react-router-dom";
-import * as imageActions from "./actions/imageActionTypes";
+import * as imageActions from "../../actions/imageActionTypes";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

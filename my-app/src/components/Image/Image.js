@@ -4,7 +4,7 @@ import { FaCommentAlt, FaHeart, FaTrash, FaThumbsUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as imageActions from "./actions/imageActionTypes";
+import * as imageActions from "../../actions/imageActionTypes";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -18,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-import * as loginActions from "./actions/LoginActionTypes";
+import * as loginActions from "../../actions/LoginActionTypes";
 
 const Images = (props) => {
   const [addLikeText, setAddLikeText] = useState(false);

@@ -1,13 +1,13 @@
 import * as React from "react";
-import ProductCategories from "./components/ProductCategories";
-import ProductSmokingHero from "./components/ProductSmokingHero";
-import AppFooter from "./components/AppFooter";
-import ProductHero from "./components/ProductHero";
-import ProductValues from "./components/ProductValues";
-import ProductHowItWorks from "./components/ProductHowItWorks";
-import ProductCTA from "./components/ProductCTA";
-import AppAppBar from "./components/AppAppBar";
-import withRoot from "./components/withRoot";
+import ProductCategories from "./components/cssComponents/ProductCategories";
+import ProductSmokingHero from "./components/cssComponents/ProductSmokingHero";
+import AppFooter from "./components/cssComponents/AppFooter";
+import ProductHero from "./components/cssComponents/ProductHero";
+import ProductValues from "./components/cssComponents/ProductValues";
+import ProductHowItWorks from "./components/cssComponents/ProductHowItWorks";
+import ProductCTA from "./components/cssComponents/ProductCTA";
+import AppAppBar from "./components/cssComponents/AppAppBar";
+import withRoot from "./components/cssComponents/withRoot";
 
 function Index() {
   return (

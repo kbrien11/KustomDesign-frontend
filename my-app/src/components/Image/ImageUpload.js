@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebaseConfig";
-import * as imageActions from "./actions/imageActionTypes";
+import { storage } from "../Firebase/firebaseConfig";
+import * as imageActions from "../../actions/imageActionTypes";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Select } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import FormButton from "./components/FormButton";
-
+import FormButton from "../cssComponents/FormButton";
+import { checkPrice } from "../../utils/Utility";
 import MenuItem from "@mui/material/MenuItem";
 
-const Test = (
+const ImageUpload = (
   images,
   serviceActions,
   profileImage,
@@ -101,27 +101,6 @@ const Test = (
     display: "block",
     margin: "0 auto",
     borderColor: "red",
-  };
-
-  const checkPrice = (size) => {
-    switch (size) {
-      case "8 x 8":
-        return `$${parseFloat(50.0).toFixed(2)}`;
-
-      case "10 x 10":
-        return `$${parseFloat(100.0).toFixed(2)}`;
-
-      case "12 x 12":
-        return `$${parseFloat(150.0).toFixed(2)}`;
-
-      case "14 x 14":
-        return `$${parseFloat(200.0).toFixed(2)}`;
-
-      case "16 x 16":
-        return `$${parseFloat(250.0).toFixed(2)}`;
-      default:
-        return `$${parseFloat(0).toFixed(2)}`;
-    }
   };
 
   const resetAddedImageText = () => {
@@ -246,4 +225,4 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default connect(mapStateToProps, mapDispatchToProps)(ImageUpload);

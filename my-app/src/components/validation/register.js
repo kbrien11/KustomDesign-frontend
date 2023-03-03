@@ -1,36 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebaseConfig";
+import { storage } from "../Firebase/firebaseConfig";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import FormControl from "@mui/material/FormControl";
-
-import * as loginActions from "./actions/LoginActionTypes";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import FormButton from "./components/FormButton";
+import * as loginActions from "../../actions/LoginActionTypes";
+import FormButton from "../cssComponents/FormButton";
 import CssBaseline from "@mui/material/CssBaseline";
 import MenuItem from "@mui/material/MenuItem";
 import { Formik, Form } from "formik";
 import TextField from "@mui/material/TextField";
-import RFTextField from "./components/RFTextfield";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AppAppBar from "./components/AppAppBar";
-import AppFooter from "./components/AppFooter";
-import AppForm from "./components/AppForm";
-import theme from "./components/theme";
-import { signInFormValidation } from "./components/validation/signFormValidation";
-import { resolveBreakpointValues } from "@mui/system/breakpoints";
+import AppAppBar from "../cssComponents/AppAppBar";
+import AppFooter from "../cssComponents/AppFooter";
+import AppForm from "../cssComponents/AppForm";
+import theme from "../cssComponents/theme";
+import { signInFormValidation } from "./signFormValidation";
 import { Select } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
 
 const Register = ({ success, error, serviceActions }) => {
   const [progress, setProgress] = useState(0);
