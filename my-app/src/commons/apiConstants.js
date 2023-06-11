@@ -5,3 +5,5 @@ export const GET_IMAGE_DATA = "http://127.0.0.1:8000/api/images";
 export const LOGIN = "http://127.0.0.1:8000/api/login";
 
 export const REGISTER = "http://127.0.0.1:8000/api/register";
+
+export const TOTAL_IMAGES = "http://127.0.0.1:8000/api/home_images";

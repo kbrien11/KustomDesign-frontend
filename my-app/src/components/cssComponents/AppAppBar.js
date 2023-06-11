@@ -68,6 +68,16 @@ function AppAppBar() {
               <Link
                 variant="h6"
                 underline="none"
+                href="/explore"
+                sx={{ ...rightLink }}
+              >
+                {"Explore"}
+              </Link>
+            )}
+            {sessionPk && (
+              <Link
+                variant="h6"
+                underline="none"
                 href="/"
                 onClick={() => sessionStorage.removeItem("loggedInPK")}
                 sx={{ ...rightLink, color: "secondary.main" }}

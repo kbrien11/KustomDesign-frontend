@@ -57,7 +57,7 @@ function SignIn({ userType, id, serviceActions, isError, errorMessage }) {
   const check = (userActionType) => {
     if (userActionType === " User" || userActionType === "User") {
       console.log(userActionType);
-      navigate("/user");
+      navigate("/home");
     }
     if (userActionType === "Artist") {
       navigate(`/artistProfilePage/${id}`);

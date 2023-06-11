@@ -8,6 +8,7 @@ import SignIn from "./components/validation/signIn";
 import Home from "./Home";
 import LandingPage from "./LandingPage";
 import ImageUpload from "./components/Image/ImageUpload";
+import ExplortArtist from "./components/Artist/ExploreArtist";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/artist" element={<ArtistPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/explore" element={<ExplortArtist />} />
         <Route path="/artistProfilePage:name" element={<ArtistProfilePage />} />
         <Route path="/artistProfilePage/:id" element={<ArtistProfilePage />} />
         <Route path="/" element={<LandingPage />} />

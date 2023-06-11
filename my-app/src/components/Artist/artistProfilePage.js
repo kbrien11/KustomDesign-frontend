@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Images from "../Image/Image";
+import ArtistImages from "../Image/ArtistImages";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import * as imageActions from "../../actions/imageActionTypes";
+import * as loginActions from "../../actions/LoginActionTypes";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Divider from "@mui/material/Divider";
@@ -15,27 +16,38 @@ import Typography from "@mui/material/Typography";
 
 const ArtistProfilePage = ({
   images,
-  serviceActions,
+  serviceImageActions,
   profileImage,
   firstName,
   lastName,
   sessionId,
 }) => {
   const { name } = useParams();
-  const artistid = sessionStorage.getItem("loggedInPK");
-  console.log(sessionId);
+
+  console.log(`name    ${name}`);
+
+  const artistPk = sessionStorage.getItem("loggedInPK");
+  console.log(artistPk);
   const backgroundImage =
     "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&amp;w=1000&amp;q=80";
 
   useEffect(() => {
-    serviceActions.getImageDataForArtist(artistid, name);
+    if (name != null) {
+      serviceImageActions.getImageDataForArtist(name, null);
+    } else {
+      serviceImageActions.getImageDataForArtist(name, artistPk);
+    }
   }, []);
   useEffect(() => {
-    serviceActions.getArtistProfilePicture(artistid, name);
+    if (name != null) {
+      serviceImageActions.getArtistProfilePicture(name, null);
+    } else {
+      serviceImageActions.getArtistProfilePicture(name, artistPk);
+    }
   }, []);
 
   const imageMap = images.map((img) => {
-    return <Images data={img} />;
+    return <ArtistImages props={img} />;
   });
 
   const drawerWidth = 240;
@@ -122,8 +134,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  serviceActions: bindActionCreators(
+  serviceImageActions: bindActionCreators(
     { ...imageActions.imageServices },
+    dispatch
+  ),
+  serviceLoginActions: bindActionCreators(
+    { ...loginActions.loginServices },
     dispatch
   ),
 });

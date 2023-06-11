@@ -45,9 +45,23 @@ export const imageServices = {
         console.log(err);
       });
   },
-  getImageDataForArtist: (artistid, name) => (dispatch) => {
-    console.log(artistid, name);
-    fetch(`http://127.0.0.1:8000/api/imagePerArtist/${artistid}/${name}`)
+  getHomeImages: () => (dispatch) => {
+    fetch(apiConstants.TOTAL_IMAGES)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.images.length > 0) {
+          dispatch(loadImagesData(response.images));
+          dispatch(loadShowDetails(response.showDetails));
+        } else {
+          console.log("error getting images");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getImageDataForArtist: (name, artistId) => (dispatch) => {
+    fetch(`http://127.0.0.1:8000/api/imagePerArtist/${name}/${artistId}`)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
@@ -79,9 +93,9 @@ export const imageServices = {
         console.log(err);
       });
   },
-  getArtistProfilePicture: (artistpk, artistUsername) => (dispatch) => {
+  getArtistProfilePicture: (artistUsername, artistId) => (dispatch) => {
     fetch(
-      `http://127.0.0.1:8000/api/artistProfilePiceture/${artistpk}/${artistUsername}`
+      `http://127.0.0.1:8000/api/artistProfilePiceture/${artistUsername}/${artistId}`
     )
       .then((response) => response.json())
       .then((response) => {
@@ -90,6 +104,21 @@ export const imageServices = {
           dispatch(loadArtistProfileImage(response.data));
           dispatch(loadArtistProfileFirstName(response.first_name));
           dispatch(loadArtistProfilelastName(response.last_name));
+        } else {
+          console.log("error getting profile image");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getTotalArtistImages: () => (dispatch) => {
+    fetch("http://127.0.0.1:8000/api/totalArtistImages")
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.images.length > 0) {
+          dispatch(loadImagesData(response.images));
         } else {
           console.log("error getting profile image");
         }

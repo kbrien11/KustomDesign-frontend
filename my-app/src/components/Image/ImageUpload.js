@@ -24,7 +24,7 @@ const ImageUpload = (
   const [addedImage, setAddedImageText] = useState(false);
   const [inputSize, setInputSize] = useState("");
   const [inputPrice, setInputPrice] = useState("");
-
+  const [disabled, setDisabled] = useState(true);
   const [image, setImages] = useState([]);
 
   const [progress, setProgress] = useState(0);
@@ -168,25 +168,26 @@ const ImageUpload = (
                 accept="image/*"
                 onChange={(e) => {
                   setInputimage(e.target.value);
+                  setDisabled(false);
                 }}
               />
               <div class="drag-text">
                 {inputImage.length === 0 ? (
-                  <h3>select add Image</h3>
+                  <h2>select add Image</h2>
                 ) : (
-                  <h3>Image selected</h3>
+                  <h2>Image selected</h2>
                 )}
               </div>
             </div>
 
-            <FormButton
+            <button
               className="imageUploadButton"
               type="submit"
-              disabled={inputImage.length < 1}
+              disabled={disabled}
             >
               {" "}
               Upload
-            </FormButton>
+            </button>
           </form>
         </div>
       )}
