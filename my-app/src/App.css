@@ -54,14 +54,13 @@
 }
 
 .grid-wrapper{
-  
-  width: 50%;
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  padding-top: 50px;
-  margin-bottom: 100px;
+  display: flex;
+  width: 800px;
+    flex-wrap: wrap;
+    
+    grid-gap: 6px;
+    justify-content: center;
  }
 
 
@@ -85,9 +84,24 @@
   border-radius: 3px;
   margin-top: -10px;
 }
-
+.imageUploadContainer{
+  
+  
+    /* Add the blur effect */
+     filter: blur(8px);
+    -webkit-filter: blur(8px); 
+  
+    /* Full height */
+    height: 90vh;
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .image-container{
   padding: 2px 16px;
+
 }
 
 .image {
@@ -112,16 +126,26 @@
 .addImageContainer{
   min-width: 600px;
   max-width: 600px;
-  min-height: 400px;
+  min-height: 300px;
   margin: auto;
   border-radius: 8px;
   margin-bottom: 40px;
   padding-bottom: 80px;
-  margin-top: 2%;
+border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 45%;
+  left: 50%;
   padding-right: 150px;
-  padding-top: 1px;
-  background-color: white;
+  padding-top: 15px;
+  background-color: whitesmoke;
+  color: rgb(24, 24, 24);
+  font-weight: bold;
+    /* Fallback color */
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    /* Black w/opacity/see-through */
   transition: 0.3s;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .addImageContainer h4{
@@ -218,7 +242,8 @@ top: 0px;
  
 }
 .artistProfilePageBackground{
-background-color: rgb(241, 238, 238)
+background-color:inherit;
+
 }
 .artistProfilePage h5 {
   margin-top: 20px;
@@ -306,26 +331,85 @@ background-color: rgb(241, 238, 238)
 }
 
 .menuItem{
-    height: 100%;
-      width: 260px;
+    max-height: 85%;
+      width: 360px;
       position: fixed;
       z-index: 1;
-      top: 0;
-      left: 0;
+      margin-top: 20px;
+      border-radius: 16px;
+      justify-content: flex-start;
       background-color: whitesmoke(245, 249, 245);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       overflow-x: hidden;
-      padding-top: 50px;
+      margin-left: 40px;
       color: black;
+      padding-left: 20px;
+      padding-right: 20px;
 }
 .menuItem p{
-  padding: 6px 8px 6px 16px;
+  padding: 16px 18px 16px 16px;
     text-decoration: none;
     font-size: 20px;
     color: black;
     display: block;
+    padding-right: 55px;
 }
+.menuItem img {
+  margin-top: 30px;
+  height: 70px;
+  float: left;
+  margin-left: 20px;
+  border-radius: 50%;
+  width: 70px;
 
+}
+.menuItem h5{
+     margin-top: 40px;
+      color: black;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: bold;
+      
+      font-size: 20px;
+}
+.menuItem span{
+    color: black;
+      font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+}
+.menuItem h4 {
+  color: black;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 20px;
+}
+.menuItem h3 {
+  margin-top: -40px;
+  color: black;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+margin-left: 20px;
+  font-size: 20px;
+}
+.menuItem h2 {
+  margin-top: 40px;
+  color: black;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  margin-left: 20px;
+  font-size: 15px;
+}
+.menuItem text {
+  overflow-wrap: break-word;
+    word-wrap: break-word;
+  color: rgb(35, 35, 35);
+  font-family: 'Times New Roman', Times, serif;
+  margin-left: 20px;
+  font-size: 14px;
+  max-width: 300px;
+  padding: 12px;
+  text-align: center;
+}
 .image-upload-wrap {
   margin-top: 20px;
   border: 4px dashed #1FB264;
@@ -435,25 +519,30 @@ position: absolute;
 .hero-image-container{
   margin-top: 5%;
   background-color: inherit;
-  margin-left: 5%;
+  margin-left: 10%;
 
 }
+
 .hero-image img {
   
- 
-  border-radius: 13px;
-image-rendering: pixelated;
-    height: 35%;
-    width: 87%;
-
+object-fit: cover;
+  border-radius: 18px;
+image-rendering: -webkit-optimize-contrast;
+    height: 30%;
+    width: 72%;
+    background: transparent;
+ z-index: 0;
+  object-position: 50% 33.33%;
   position: absolute;
 }
+
+
 
 .hero-text {
   
   position: absolute;
   top: 30%;
-  left: 20%;
+  left: 23%;
   float: left;
   transform: translate(-50%, -50%);
   color: white;
@@ -478,7 +567,7 @@ image-rendering: pixelated;
 
 .Featured-Artists{
   margin-top: 30%;
-  margin-left: 5%;
+  margin-left: 8%;
 }
 .Featured-Artists h2{
     font-family: sans-serif;
@@ -486,8 +575,41 @@ image-rendering: pixelated;
     font-weight: bold;
 }
 .Featured-Artists-Grid-Container{
-  display: flex;
   flex-wrap: wrap;
+  margin: auto;
     text-align: center;
+padding: 0px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      
+      /*centers items on the line (the x-axis by default)*/
+      align-items: center;
+      /*centers items on the cross-axis (y by default)*/
     grid-gap: 6px;
+}
+
+.ratingAndPaintingText {
+  display: flex;
+  margin-left: 20px;
+  align-items: flex-start;
+  justify-content: space-around;
+    grid-gap: 15px;
+  
+}
+
+.ratingAndPaintingValues{
+  display: flex;
+    margin-left: 20px;
+    align-items: flex-start;
+    justify-content: space-around;
+    grid-gap: 15px;
+}
+.MenuItemButtons{
+    display: flex;
+      margin-left: 20px;
+      margin-top: 50px;
+      align-items: flex-start;
+      justify-content: space-around;
+      grid-gap: 5px;
 }

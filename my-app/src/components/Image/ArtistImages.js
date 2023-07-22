@@ -23,11 +23,10 @@ export const ArtistImages = ({ props, images }) => {
       <Grid paddingRight="30px">
         <Card
           sx={{
-            maxWidth: 375,
-            borderRadius: "7px",
-            marginBottom: "25px",
-            minWidth: 300,
-            paddingBottom: "24px",
+            maxWidth: 215,
+            borderRadius: "17px",
+
+            minWidth: 200,
           }}
           xs={12}
           sm={6}
@@ -36,25 +35,11 @@ export const ArtistImages = ({ props, images }) => {
           <CardActionArea>
             <CardMedia
               component="img"
-              height="340"
+              height="250"
               image={props.image}
               alt="green iguana"
             />
           </CardActionArea>
-          <Typography
-            color="inherit"
-            align="left"
-            variant="h6"
-            sx={{ paddingLeft: "20px", paddingTop: "20px" }}
-          ></Typography>
-          <Typography
-            color="inherit"
-            align="left"
-            variant="h7"
-            sx={{ paddingRight: "20px", float: "right" }}
-          >
-            {images.price}
-          </Typography>
         </Card>
       </Grid>
     </div>

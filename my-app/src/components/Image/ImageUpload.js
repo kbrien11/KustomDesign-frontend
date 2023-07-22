@@ -10,7 +10,10 @@ import { Select } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FormButton from "../cssComponents/FormButton";
 import { checkPrice } from "../../utils/Utility";
+import AppAppBar from "../cssComponents/AppAppBar";
+import theme from "../cssComponents/theme";
 import MenuItem from "@mui/material/MenuItem";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 
 const ImageUpload = (
   images,
@@ -109,104 +112,110 @@ const ImageUpload = (
 
   return (
     <div>
-      {addedImage && (
-        <div className="addedImageText">
-          <h5> Image added</h5>
-        </div>
-      )}
-      {!loading && (
-        <div className="addImageContainer">
-          <h4> Upload Image</h4>
-          <form onSubmit={handChange}>
-            <label className="input-label-add-image">
-              {" "}
-              <p>Size*</p>
-            </label>
-            <Select
-              margin="normal"
-              required
-              size="xlarge"
-              fullWidth
-              value={inputSize}
-              name={"size"}
-              type="text"
-              id="user_type"
-              onChange={(e) => {
-                setInputSize(e.target.value);
-                setInputPrice(checkPrice(e.target.value));
-              }}
-            >
-              <MenuItem value={"8 x 8"}>8 x 8</MenuItem>
-              <MenuItem value={"10 x 10"}>10 x 10</MenuItem>
-              <MenuItem value={"12 x 12"}>12 x 12</MenuItem>
-              <MenuItem value={"14 x 14"}>14 x 14</MenuItem>
-              <MenuItem value={"16 x 16"}>16 x 16</MenuItem>
-            </Select>
+      <div className="imageUploadContainer"> </div>
+      <ThemeProvider theme={theme}>
+        <AppAppBar />
+        <div>
+          {addedImage && (
+            <div className="addedImageText">
+              <h5> Image added</h5>
+            </div>
+          )}
+          {!loading && (
+            <div className="addImageContainer">
+              <h4> Upload Image</h4>
+              <form onSubmit={handChange}>
+                <label className="input-label-add-image">
+                  {" "}
+                  <p>Size*</p>
+                </label>
+                <Select
+                  margin="normal"
+                  required
+                  size="xlarge"
+                  fullWidth
+                  value={inputSize}
+                  name={"size"}
+                  type="text"
+                  id="user_type"
+                  onChange={(e) => {
+                    setInputSize(e.target.value);
+                    setInputPrice(checkPrice(e.target.value));
+                  }}
+                >
+                  <MenuItem value={"8 x 8"}>8 x 8</MenuItem>
+                  <MenuItem value={"10 x 10"}>10 x 10</MenuItem>
+                  <MenuItem value={"12 x 12"}>12 x 12</MenuItem>
+                  <MenuItem value={"14 x 14"}>14 x 14</MenuItem>
+                  <MenuItem value={"16 x 16"}>16 x 16</MenuItem>
+                </Select>
 
-            <br />
-            <label className="input-label-add-image">
-              {" "}
-              <p>Estimated Price*</p>
-            </label>
-            <TextField
-              margin="normal"
-              required
-              size="xlarge"
-              fullWidth
-              value={inputPrice}
-              name={"price"}
-              type="text"
-              id="price"
-              autoComplete="estimated price"
-            />
-            <br />
-            <div class="image-upload-wrap">
-              <input
-                class="file-upload-input"
-                // value={inputImage}
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  setInputimage(e.target.value);
-                  setDisabled(false);
-                }}
-              />
-              <div class="drag-text">
-                {inputImage.length === 0 ? (
-                  <h2>select add Image</h2>
-                ) : (
-                  <h2>Image selected</h2>
-                )}
+                <br />
+                <label className="input-label-add-image">
+                  {" "}
+                  <p>Estimated Price*</p>
+                </label>
+                <TextField
+                  margin="normal"
+                  required
+                  size="xlarge"
+                  fullWidth
+                  value={inputPrice}
+                  name={"price"}
+                  type="text"
+                  id="price"
+                  autoComplete="estimated price"
+                />
+                <br />
+                <div class="image-upload-wrap">
+                  <input
+                    class="file-upload-input"
+                    // value={inputImage}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      setInputimage(e.target.value);
+                      setDisabled(false);
+                    }}
+                  />
+                  <div class="drag-text">
+                    {inputImage.length === 0 ? (
+                      <h2>select add Image</h2>
+                    ) : (
+                      <h2>Image selected</h2>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  className="imageUploadButton"
+                  type="submit"
+                  disabled={disabled}
+                >
+                  {" "}
+                  Upload
+                </button>
+              </form>
+            </div>
+          )}
+          {loading && (
+            <div className="ImageLoadingText">
+              <h5> Trying to save image</h5>
+              <div>
+                {" "}
+                <ClipLoader
+                  color={"red"}
+                  loading={loading}
+                  cssOverride={override}
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
               </div>
             </div>
-
-            <button
-              className="imageUploadButton"
-              type="submit"
-              disabled={disabled}
-            >
-              {" "}
-              Upload
-            </button>
-          </form>
+          )}
         </div>
-      )}
-      {loading && (
-        <div className="ImageLoadingText">
-          <h5> Trying to save image</h5>
-          <div>
-            {" "}
-            <ClipLoader
-              color={"red"}
-              loading={loading}
-              cssOverride={override}
-              size={150}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          </div>
-        </div>
-      )}
+      </ThemeProvider>
     </div>
   );
 };

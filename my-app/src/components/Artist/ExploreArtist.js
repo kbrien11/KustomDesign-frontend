@@ -54,11 +54,9 @@ const ExplortArtist = ({ serviceImageActions, images }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
             sx={{
-              paddingTop: "20px",
-              paddingLeft: "20px",
               paddingBottom: "30px",
+              maxWidth: "1400px",
               margin: "auto",
-              maxWidth: "1550px",
               minWidth: "1000px",
               backgroundColor: "inherit",
             }}

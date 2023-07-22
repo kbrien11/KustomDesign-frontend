@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { FaCommentAlt, FaHeart, FaTrash, FaThumbsUp } from "react-icons/fa";
+import {
+  FaCommentAlt,
+  FaHeart,
+  FaTrash,
+  FaThumbsUp,
+  FaUser,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Person3Icon from "@mui/icons-material/Person3";
 import * as imageActions from "../../actions/imageActionTypes";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -27,7 +34,8 @@ export const ArtistImagesDetails = ({ props, images }) => {
       <div>
         <CardMedia
           component="img"
-          height="340"
+          height="250"
+          paddingBottom="3px"
           image={memoImages.item}
           alt="green iguana"
         />
@@ -64,10 +72,12 @@ export const ArtistImagesDetails = ({ props, images }) => {
         <Card
           sx={{
             maxWidth: 450,
-            borderRadius: "20px",
-            marginBottom: "25px",
+            borderRadius: "10px",
+            marginBottom: "15px",
             minWidth: 440,
-            paddingBottom: "24px",
+            margin: "auto",
+            paddingBottom: "5px",
+            maxHeight: "540px",
           }}
           xs={12}
           sm={6}
@@ -86,8 +96,9 @@ export const ArtistImagesDetails = ({ props, images }) => {
               alt="green iguana"
               sx={{
                 borderRadius: "50%",
-                height: "45px",
+                height: "35px",
                 width: "45px",
+
                 marginLeft: "15px",
               }}
             />
@@ -134,9 +145,10 @@ export const ArtistImagesDetails = ({ props, images }) => {
               mt: 3,
               mb: 2,
               float: "right",
-              marginTop: "40px",
+              marginTop: "10px",
               marginRight: "20px",
               borderRadius: "8px",
+              color: "secondary",
             }}
             // disabled={
             //   errors.password ||
@@ -146,7 +158,12 @@ export const ArtistImagesDetails = ({ props, images }) => {
             // }
 
             size="small"
-            variant="outlined"
+            variant="contained"
+            color="primary"
+            aria-label="fingerprint"
+            startIcon={
+              <Person3Icon color="secondary" aria-label="delete" size="large" />
+            }
             onClick={(e) => viewProfile(memoImages.username)}
           >
             Profile

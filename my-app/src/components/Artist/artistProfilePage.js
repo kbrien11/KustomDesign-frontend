@@ -6,13 +6,16 @@ import * as imageActions from "../../actions/imageActionTypes";
 import * as loginActions from "../../actions/LoginActionTypes";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Divider from "@mui/material/Divider";
-import { ArtistProfilePageMenuItems } from "../cssComponents/ArtistProfilePageMenuItems";
+import Person3Icon from "@mui/icons-material/Person3";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "../cssComponents/theme";
 import AppAppBar from "../cssComponents/AppAppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Masonry from "@mui/lab/Masonry";
+import FormButton from "../cssComponents/FormButton";
 
 const ArtistProfilePage = ({
   images,
@@ -24,7 +27,15 @@ const ArtistProfilePage = ({
 }) => {
   const { name } = useParams();
 
-  console.log(`name    ${name}`);
+  const Label = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(0.5),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+  }));
 
   const artistPk = sessionStorage.getItem("loggedInPK");
   console.log(artistPk);
@@ -49,6 +60,10 @@ const ArtistProfilePage = ({
   const imageMap = images.map((img) => {
     return <ArtistImages props={img} />;
   });
+
+  console.log("🚀 ~ file: artistProfilePage.js:65 ~ images:", images);
+
+  const imageLength = imageMap.length;
 
   const drawerWidth = 240;
 
@@ -91,7 +106,132 @@ const ArtistProfilePage = ({
         <div className="displayDashboardGrid">
           <div className="menuItem">
             {" "}
-            <p>{ArtistProfilePageMenuItems}</p>
+            <p>
+              <img src={profileImage} width="50" height="150"></img>
+              <h5 className="AristFirstName">
+                {firstName.charAt(0).toUpperCase() + firstName.slice(1)}{" "}
+                <span className="ArtistLastName">{lastName}</span>
+              </h5>
+            </p>
+            <hr></hr>
+            <h2> Bio</h2>
+            <text>
+              {" "}
+              Colombian artists based in Soho - New York. If you are looking for
+              a realism, lettering or black work tattoos, Alejandro is your guy.
+            </text>
+            <h2> Characteristics</h2>
+            <div className="ratingAndPaintingValues">
+              <Box
+                component="span"
+                sx={{
+                  background: "whitesmoke",
+                  maxHeight: 80,
+                  maxWidth: 100,
+                  paddingRight: 3,
+                  paddingLeft: 3,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  borderRadius: 3,
+                }}
+              >
+                <Typography
+                  color="inherit"
+                  align="center"
+                  variant="h7"
+                  sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+                >
+                  {" "}
+                  Rating{" "}
+                </Typography>
+                <Typography
+                  color="whitesmoke"
+                  align="left"
+                  variant="h5"
+                  sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+                >
+                  {" "}
+                  {stars}
+                </Typography>
+              </Box>
+              <Box
+                component="span"
+                sx={{
+                  background: "whitesmoke",
+                  maxHeight: 80,
+                  paddingRight: 3,
+                  paddingLeft: 3,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  borderRadius: 3,
+                  minWidth: 100,
+                }}
+              >
+                <Typography
+                  color="inherit"
+                  align="center"
+                  variant="h7"
+                  sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+                >
+                  Paintings
+                </Typography>
+                <Typography
+                  color="inherit"
+                  align="left"
+                  variant="h5"
+                  sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+                >
+                  {" "}
+                  {images.length}
+                </Typography>
+              </Box>
+            </div>
+            <div className="MenuItemButtons">
+              <FormButton
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  float: "right",
+                  marginTop: "10px",
+                  marginRight: "20px",
+                  borderRadius: "8px",
+                  color: "secondary",
+                }}
+                size="small"
+                variant="contained"
+                color="primary"
+                aria-label="fingerprint"
+                startIcon={
+                  <Person3Icon
+                    color="secondary"
+                    aria-label="Save"
+                    size="large"
+                  />
+                }
+              >
+                Save
+              </FormButton>
+              <FormButton
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  float: "right",
+                  marginTop: "10px",
+                  marginRight: "20px",
+                  borderRadius: "8px",
+                  color: "secondary",
+                }}
+                size="small"
+                variant="contained"
+                color="primary"
+                aria-label="fingerprint"
+                startIcon={
+                  <Person3Icon color="primary" aria-label="Save" size="large" />
+                }
+              >
+                Book
+              </FormButton>
+            </div>
           </div>
           <div className="artistContentGrid">
             <Typography
@@ -99,25 +239,34 @@ const ArtistProfilePage = ({
               align="center"
               variant="h5"
               sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
+            ></Typography>
+            <Box
+              sx={{
+                width: 900,
+                minHeight: 529,
+                maxHeight: 600,
+                paddingLeft: 10,
+              }}
             >
-              <div className="artistProfilePage">
-                <div className="artistProfilePageContainer">
-                  <h5 className="AristFirstName">
-                    {firstName}{" "}
-                    <span className="ArtistLastName">{lastName}</span>
-                  </h5>
-                  <img src={profileImage} width="50" height="150"></img>
-                  <p>{stars}</p> <br />
-                  <h4>Paintings: {imageMap.length}</h4>
-                </div>
-              </div>
-            </Typography>
-
-            {images.length > 0 && (
-              <div className="grid-wrapper-container">
-                <div className="grid-wrapper">{imageMap}</div>
-              </div>
-            )}
+              <Masonry columns={3} spacing={2}>
+                {images.map((item, index) => (
+                  <div key={index}>
+                    <img
+                      src={item}
+                      alt={item}
+                      loading="lazy"
+                      style={{
+                        justifyContent: "center",
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
+                        display: "flex",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                ))}
+              </Masonry>
+            </Box>
           </div>
         </div>
       </ThemeProvider>
